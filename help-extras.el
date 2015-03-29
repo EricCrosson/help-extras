@@ -38,10 +38,10 @@
 
 ;; The default help keys are
 
-;; (bind-key "C-h c" 'describe-key-briefly)
-;; (bind-key "C-h k" 'describe-key)
-;; (bind-key "C-h f" 'describe-function)
-;; (bind-key "C-h v" 'describe-variable)
+;; (define-key help-extras-map "C-h c" 'describe-key-briefly)
+;; (define-key help-extras-map "C-h k" 'describe-key)
+;; (define-key help-extras-map "C-h f" 'describe-function)
+;; (define-key help-extras-map "C-h v" 'describe-variable)
 
 
 
@@ -52,9 +52,9 @@
 ;; (Currently there is no analagous function to find a binding in code
 ;; -- not sure this is possible yet. It would certainly be useful.)
 
-;; (bind-key "C-h C-k" 'find-function-on-key)
-;; (bind-key "C-h C-f" 'find-function)
-;; (bind-key "C-h C-v" 'find-variable)
+;; (define-key help-extras-map "C-h C-k" 'find-function-on-key)
+;; (define-key help-extras-map "C-h C-f" 'find-function)
+;; (define-key help-extras-map "C-h C-v" 'find-variable)
 
 ;; This is to say, to find the source defining a lisp construct of
 ;; interest, invoke the normal help keybinding but continue holding
@@ -62,24 +62,25 @@
 
 ;; I also recommend the miscellaneous bindings
 
-;; (bind-key "C-h C-l" 'find-library)
+;; (define-key help-extras-map "C-h C-l" 'find-library)
 
-;; (bind-key "C-h C-M-b" 'describe-function-binding-briefly)
+;; (define-key help-extras-map "C-h C-M-b" 'describe-function-binding-briefly)
 
 
 ;; The following bindings extend the default help system to include
 ;; analagous commands that find insert the selected list construct.
 
-;; (bind-key "C-h C-M-c" 'insert-function-on-key)
-;; (bind-key "C-h C-M-k" 'insert-key-combination)
-;; (bind-key "C-h C-M-f" 'insert-function-name)
-;; (bind-key "C-h C-M-v" 'insert-variable)
+;; (define-key help-extras-map "C-h C-M-c" 'insert-function-on-key)
+;; (define-key help-extras-map "C-h C-M-k" 'insert-key-combination)
+;; (define-key help-extras-map "C-h C-M-f" 'insert-function-name)
+;; (define-key help-extras-map "C-h C-M-v" 'insert-variable)
 
 ;; This is to say, to insert the symbol name of the selected construct
 ;; at point, invoke the normal help keybinding but hold control and
 ;; meta during the second keypress.
 
 ;;; Code:
+(require 'find-func)
 
 ;;;###autoload
 (defun insert-variable (variable)
@@ -234,22 +235,22 @@ Completion is available for the keymap name."
 (defvar help-extras-map (make-keymap)
   "The keymap for function `help-extras'.")
 
-(bind-key "C-h c" 'describe-key-briefly help-extras-map)
-(bind-key "C-h k" 'describe-key help-extras-map)
-(bind-key "C-h f" 'describe-function help-extras-map)
-(bind-key "C-h v" 'describe-variable help-extras-map)
+(define-key help-extras-map "C-h c" 'describe-key-briefly)
+(define-key help-extras-map "C-h k" 'describe-key)
+(define-key help-extras-map "C-h f" 'describe-function)
+(define-key help-extras-map "C-h v" 'describe-variable)
 
-(bind-key "C-h C-k" 'find-function-on-key help-extras-map)
-(bind-key "C-h C-f" 'find-function help-extras-map)
-(bind-key "C-h C-v" 'find-variable help-extras-map)
+(define-key help-extras-map "C-h C-k" 'find-function-on-key)
+(define-key help-extras-map "C-h C-f" 'find-function)
+(define-key help-extras-map "C-h C-v" 'find-variable)
 
-(bind-key "C-h C-l" 'find-library help-extras-map)
-(bind-key "C-h C-M-b" 'describe-function-binding-briefly help-extras-map)
+(define-key help-extras-map "C-h C-l" 'find-library)
+(define-key help-extras-map "C-h C-M-b" 'describe-function-binding-briefly)
 
-(bind-key "C-h C-M-c" 'insert-function-on-key help-extras-map)
-(bind-key "C-h C-M-k" 'insert-key-combination help-extras-map)
-(bind-key "C-h C-M-f" 'insert-function-name help-extras-map)
-(bind-key "C-h C-M-v" 'insert-variable help-extras-map)
+(define-key help-extras-map "C-h C-M-c" 'insert-function-on-key)
+(define-key help-extras-map "C-h C-M-k" 'insert-key-combination)
+(define-key help-extras-map "C-h C-M-f" 'insert-function-name)
+(define-key help-extras-map "C-h C-M-v" 'insert-variable)
 
 ;;;###autoload
 (define-minor-mode help-extras
